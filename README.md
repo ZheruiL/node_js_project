@@ -1,2 +1,5 @@
 # node_js_project
-node js project
+
+npm start
+
+the port is set as 3001
