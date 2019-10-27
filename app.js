@@ -1,91 +1,71 @@
-var express = require('express')
-var path = require('path')
-var cookieParser = require('cookie-parser')
-var logger = require('morgan')
-const async = require('async')
+const express = require('express')
+var bodyParser = require('body-parser') // get post param
+const app = express()
+const cors = require('cors')
+const fs = require('fs')
+const Product = require('./models/product')
+let productId = 5
 
-var indexRouter = require('./routes/index')
-var usersRouter = require('./routes/users')
-const catalogRouter = require('./routes/catalog')
+app.use(bodyParser.json())
+app.use(cors())
+app.use(bodyParser.urlencoded({ extended: false }))
 
-var app = express()
-
-// Connection db
-const MongoClient = require('mongodb').MongoClient
-const assert = require('assert')
-
-// Connection URL
-const url = 'mongodb://localhost:27017'
-
-// Database Name
-const dbName = 'myproject'
-
-// Create a new MongoClient
-const client = new MongoClient(url)
-
-// Use connect method to connect to the Server
-client.connect(function (err) {
-  assert.strictEqual(null, err)
-  console.log('Connected successfully to server')
-
-  const db = client.db(dbName)
-
-  client.close()
+let products
+fs.readFile('Products.json', (err, data) => {
+  if (err) throw err
+  data = JSON.parse(data)
+  products = data.map((ele) => {
+    return new Product(ele._id, ele.name, ele.type, ele.price, ele.rating, ele.warrantyYears, ele.available)
+  })
 })
 
-const insertDocuments = function (db, callback) {
-  // Get the documents collection
-  const collection = db.collection('documents')
-  // Insert some documents
-  collection.insertMany([
-    { a: 1 }, { a: 2 }, { a: 3 }
-  ], function (err, result) {
-    assert.strictEqual(err, null)
-    assert.strictEqual(3, result.result.n)
-    assert.strictEqual(3, result.ops.length)
-    console.log('Inserted 3 documents into the collection')
-    callback(result)
+app.get('/test', (req, res) => {
+  const p1 = new Product('name', 'type', 'price', 'rating', 'warrantyYears', 'available')
+  res.json(p1)
+})
+app.get('/products', (req, res) => {
+  res.json(products)
+})
+app.post('/product', (req, res) => {
+  // req = JSON.stringify(req.body)
+  const p1 = new Product(productId, req.body.name, req.body.type, req.body.price, req.body.rating, req.body.warrantyYears, req.body.available)
+  products.push(p1)
+  productId++
+  res.json({ status: 'ok' })
+})
+app.put('/product/:id', (req, res) => {
+  const foundIndex = products.findIndex(function (element) {
+    return Number(element._id) === Number(req.params.id)
   })
-}
-
-let docss = ''
-
-const findDocuments = function (db, callback) {
-  // Get the documents collection
-  const collection = db.collection('documents')
-  // Find some documents
-  collection.find({}).toArray(function (err, docs) {
-    assert.equal(err, null)
-    console.log('Found the following records')
-    console.log(docs)
-    docss += docs
-    callback(docs)
+  if (foundIndex !== -1) {
+    products[foundIndex] = new Product(req.body.id, req.body.name, req.body.type, req.body.price, req.body.rating, req.body.warrantyYears, req.body.available)
+    res.json({ status: 'ok' })
+    // res.json(found)
+  } else {
+    res.status(404).send('Not Found')
+  }
+})
+app.delete('/product/:id', (req, res) => {
+  const foundIndex = products.findIndex(function (element) {
+    return Number(element._id) === Number(req.params.id)
   })
-}
-
-// Use connect method to connect to the server
-/* client.connect(function (err) {
-  assert.equal(null, err)
-  console.log('Connected correctly to server')
-
-  const db = client.db(dbName)
-  findDocuments(db, function () {
-    client.close()
+  if (foundIndex !== -1) {
+    products.splice(foundIndex, 1)
+    res.json({ status: 'ok' })
+    // res.json(found)
+  } else {
+    res.status(404).send('Not Found')
+  }
+})
+app.get('/product/:id', (req, res) => {
+  const found = products.find(function (element) {
+    return Number(element._id) === Number(req.params.id)
   })
-}) */
-
-app.use(logger('dev'))
-app.use(express.json())
-app.use(express.urlencoded({ extended: false }))
-app.use(cookieParser())
-app.use(express.static(path.join(__dirname, 'public')))
-
-app.use('/', indexRouter)
-app.use('/users', usersRouter)
-app.use('/catalog', catalogRouter)
-
-app.get('/test', function (req, res) {
-  res.send('Hello World!' + docss)
+  if (found) {
+    res.json(found)
+  } else {
+    res.status(404).send('Not Found')
+  }
 })
 
 module.exports = app
