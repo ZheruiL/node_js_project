@@ -1,1 +1,1 @@
-synopsis projet au format
+# synopsis projet au format
