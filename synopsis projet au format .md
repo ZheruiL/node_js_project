@@ -52,13 +52,13 @@ Front-end tech Stack
 3 - Plan
 ---------
 
-Première semaine: désigner le structure de base de donnée et réaliser le topic CRUD en back-end
+13/nov - 20/nov: désigner le structure de base de donnée et réaliser le topic CRUD en back-end
 
-Deuxième - troisième semaine: apprendre le React et créer la liaison avec front-end et réaliser le basique pages
+21/nov - 5/dec - troisième semaine: apprendre le React et créer la liaison avec front-end et réaliser le basique pages
 
-Quatrième semaine: améliorer les pages front-end et ajouter l'authentification pour le back-end
+6/dec - 13/dec: améliorer les pages front-end et ajouter l'authentification pour le back-end
 
-Cinqième semaine: tester et fixer les bugs
+13/dec - 20/dec: tester et fixer les bugs
 
 
 4 - Prototype
