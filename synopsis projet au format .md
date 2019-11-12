@@ -4,18 +4,32 @@
 Nous allons réaliser un forum qui peut permettre les utilisateurs à faire les communications. Les utilisateurs peuvent créer, commenter les sujets. On peut envoyer la communication personnelle entre les utilisateur.
 
 Nous allons réaliser les fonctionnalités:
+
 L’utilisateur: 
-		Login/s’inscrire
-créer le sujet
-commenter le sujet
-like le sujet ou la commentaire
-envoyer les communication personelle
+
+- Login/s’inscrire
+
+- créer le sujet
+
+- commenter le sujet
+
+- like le sujet ou la commentaire
+
+- envoyer les communication personelle
+
+
 L’administrateur:
-		gérer les utilisateurs
-		supprimer le sujet, l’utilisateur
-		limiter l’utilisateur
+
+
+- gérer les utilisateurs; 
+
+- supprimer le sujet, l’utilisateur
+
+- limiter l’utilisateur
+
 Le visiteur:
-		voir, commenter après la vértification
+
+voir, commenter après la vértification
     
     
 2 - Concevoir
@@ -24,12 +38,16 @@ Back-end tech Stack
 
 
 Une API REST en Node.js/Express qui chargera des données
+
 MongoDB avec Mongoose pour base de donnée
+
 Une liaison par WebSocket pour consulter les topic et messages en temps réel
+
 Front-end tech Stack
 
 
 Singer page application avec React
+
 Material UI pour web design
 
 3 - Plan
