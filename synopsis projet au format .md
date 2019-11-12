@@ -44,6 +44,14 @@ Cinqième semaine: tester et fixer les bugs
 
 
 4 - Prototype
-![image](https://github.com/ZheruiL/node_js_project/blob/master/images/prototype_1.png =100x100)
+![image](https://github.com/ZheruiL/node_js_project/blob/master/images/prototype_1.png)
+![image](https://github.com/ZheruiL/node_js_project/blob/master/images/prototype_2.png)
+![image](https://github.com/ZheruiL/node_js_project/blob/master/images/prototype_3.png)
+![image](https://github.com/ZheruiL/node_js_project/blob/master/images/prototype_4.png)
+![image](https://github.com/ZheruiL/node_js_project/blob/master/images/prototype_5.png)
+![image](https://github.com/ZheruiL/node_js_project/blob/master/images/prototype_6.png)
+![image](https://github.com/ZheruiL/node_js_project/blob/master/images/prototype_7.png)
+![image](https://github.com/ZheruiL/node_js_project/blob/master/images/prototype_8.png)
+![image](https://github.com/ZheruiL/node_js_project/blob/master/images/prototype_9.png)
 
 
