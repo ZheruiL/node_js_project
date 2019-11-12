@@ -21,19 +21,27 @@ Le visiteur:
 2 - Concevoir
 
 Back-end tech Stack
+
 Une API REST en Node.js/Express qui chargera des données
+
 MongoDB avec Mongoose pour base de donnée
+
 Une liaison par WebSocket pour consulter les topic et messages en temps réel
 
 Front-end tech Stack
+
 Singer page application avec React
+
 Material UI pour web design
 
 3 - Plan
 
 Première semaine: désigner le structure de base de donnée et réaliser le topic CRUD en back-end
+
 Deuxième - troisième semaine: apprendre le React et créer la liaison avec front-end et réaliser le basique pages
+
 Quatrième semaine: améliorer les pages front-end et ajouter l'authentification pour le back-end
+
 Cinqième semaine: tester et fixer les bugs
 
 
