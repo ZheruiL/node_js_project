@@ -1,6 +1,7 @@
 # synopsis projet au format
-1 - Analyser
 
+1 - Analyser
+---------------
 Nous allons réaliser un forum qui peut permettre les utilisateurs à faire les communications. Les utilisateurs peuvent créer, commenter les sujets. On peut envoyer la communication personnelle entre les utilisateur.
 
 Nous allons réaliser les fonctionnalités:
@@ -33,6 +34,7 @@ voir, commenter après la vértification
     
     
 2 - Concevoir
+--------------
 
 Back-end tech Stack
 
@@ -48,6 +50,7 @@ Front-end tech Stack
 - Material UI pour web design
 
 3 - Plan
+---------
 
 Première semaine: désigner le structure de base de donnée et réaliser le topic CRUD en back-end
 
@@ -59,6 +62,7 @@ Cinqième semaine: tester et fixer les bugs
 
 
 4 - Prototype
+--------------
 ![image](https://github.com/ZheruiL/node_js_project/blob/master/images/prototype_1.png)
 ![image](https://github.com/ZheruiL/node_js_project/blob/master/images/prototype_2.png)
 ![image](https://github.com/ZheruiL/node_js_project/blob/master/images/prototype_3.png)
