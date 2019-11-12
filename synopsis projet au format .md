@@ -22,16 +22,14 @@ Le visiteur:
 
 Back-end tech Stack
 
+
 Une API REST en Node.js/Express qui chargera des données
-
 MongoDB avec Mongoose pour base de donnée
-
 Une liaison par WebSocket pour consulter les topic et messages en temps réel
-
 Front-end tech Stack
 
-Singer page application avec React
 
+Singer page application avec React
 Material UI pour web design
 
 3 - Plan
