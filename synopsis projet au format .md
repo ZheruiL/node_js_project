@@ -44,3 +44,6 @@ Cinqième semaine: tester et fixer les bugs
 
 
 4 - Prototype
+![image](http://github.com/ZheruiL/node_js_project/images/prototype_1.png)
+
+
