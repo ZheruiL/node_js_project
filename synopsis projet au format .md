@@ -4,6 +4,11 @@
 ---------------
 Nous allons réaliser un forum qui peut permettre les utilisateurs à faire les communications. Les utilisateurs peuvent créer, commenter les sujets. On peut envoyer la communication personnelle entre les utilisateur.
 
+Features: 
+
+- users can create every topic as they want.
+- users can see who is in this site and topic, and they can do a real-time chat.
+
 Nous allons réaliser les fonctionnalités:
 
 L’utilisateur: 
