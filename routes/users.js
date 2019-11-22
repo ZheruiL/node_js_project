@@ -1,5 +1,4 @@
 const express = require('express')
-const mongoose = require('mongoose')
 
 // chargement du modèle User
 const User = require('../models/user.model.js') // User类
