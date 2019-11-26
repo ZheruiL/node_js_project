@@ -41,12 +41,26 @@ module.exports.create = async function (title, content) {
 }
 
 module.exports.delete = async function (_id) {
-
+  try {
+    await Topic.deleteOne({ _id: _id })
+    return { status: true }
+  } catch (err) {
+    console.log('console.log can not find any topic')
+    return ({ status: false, error: err })
+  }
+  /*
+  await Topic.deleteOne({ _id: _id }, function (err) {
+    if (err) {
+      return ({ status: false, error: err })
+    }
+    // deleted at most one topic
+    return { status: true }
+  }) */
 }
 
 module.exports.find = async function () {
   try {
-    const topics = await Topic.find({})
+    const topics = await Topic.find({}).sort({ dateCreate: 'desc' }).exec()
     return { topics: topics, error: '' }
   } catch (err) {
     console.log('console.log can not find any topic')

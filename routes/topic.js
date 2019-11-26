@@ -45,6 +45,17 @@ router.get('/', async (req, res) => {
   res.json(topics)
 })
 
+// 删除
+router.delete('/:topicId', async (req, res) => {
+  // res.json({ status: 'caonimaa' })
+  const result = await Topic.delete(req.params.topicId)
+  if (result.status === true) {
+    res.json({ status: 'ok' })
+  } else {
+    res.status(400).send(result)
+  }
+})
+
 // test find article
 /* router.get('/test_find', async (req, res) => {
   // population du champ writer
