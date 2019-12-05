@@ -1,42 +1,24 @@
 const express = require('express')
-const mongoose = require('mongoose')
 
 // chargement du modèle User
 const User = require('../models/user.model.js') // User类
-const Topic = require('../models/topic.model') // Article类
+const Comment = require('../models/comment.model')
 
 const router = express.Router()
 
-/* add test article */
-/* router.get('/test_add', async (req, res) => {
-  // création d'une pseudo jointure
-  const user = await User.findOne('biaoqq')
-
-  const article = new Topic({
-    _writer: user._id, // la référence se fait par l'id
-    title: 'Un titre',
-    content: 'Mon premier article',
-    comments: []
-  })
-  article.save()
-
-  res.send(article)
-}) */
-
-router.get('/test_add', async (req, res) => {
-  await Topic.create('为什么我能在《死亡搁浅》的世界里逗留100小时？', '游研社： 我已经是30万赞的搁浅KOL了。 文 / 嘤肉卫星 看到这篇文章的时候，应该有不少玩家已经走上了“快递”或者“云快递”之旅了，对于《死亡搁浅》到底长什么样、怎么玩，应该也有了自己的理解。 我知道对于…')
-  res.json('ok')
-})
-
-// 添加topic
+// 添加comment
 router.post('/', async (req, res) => {
   // req = JSON.stringify(req.body)
   // await p1 = new Product(productId, req.body.name, req.body.type, req.body.price, req.body.rating, req.body.warrantyYears, req.body.available)
-  if (req.body.title == null) {
-    res.status(400).send('title is required')
+  if (req.body._topic == null) {
+    res.status(400).send('topic id is required')
     return // 需要return停止
   }
-  const result = await Topic.create(req.body.title, req.body.content)
+  if (req.body.content == null) {
+    res.status(400).send('content is required')
+    return // 需要return停止
+  }
+  const result = await Comment.create(req.body._topic, req.body.content, req.body.parentId)
   if (result.status === false) {
     res.status(400).send(result)
   } else {
@@ -44,10 +26,10 @@ router.post('/', async (req, res) => {
   }
 })
 
-// 获得话题列表
-router.get('/', async (req, res) => {
-  const topics = await Topic.find()
-  res.json(topics)
+// 获得评论列表
+router.get('/:topicId', async (req, res) => {
+  const comments = await Comment.find(req.params.topicId)
+  res.json(comments)
 })
 
 // 获得单个话题

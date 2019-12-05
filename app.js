@@ -9,6 +9,7 @@ var indexRouter = require('./routes/index')
 const users = require('./routes/users.js')
 const article = require('./routes/article')
 const topic = require('./routes/topic')
+const comment = require('./routes/comment')
 const bodyParser = require('body-parser') // pour parser les requêtes POST
 
 const mongoose = require('mongoose')
@@ -39,6 +40,7 @@ app.use(session({
 app.use('/user', users) // 使用这个路由给user
 app.use('/article', article)
 app.use('/topics', topic)
+app.use('/comments', comment)
 
 app.get('/', (req, res) => {
   res.send('ok')
