@@ -46,6 +46,12 @@ app.get('/', (req, res) => {
   res.send('ok')
 })
 
+const sha256 = require('js-sha256')
+app.get('/test', (req, res) => {
+  const time = Date.now()
+  res.send(sha256(time.toString() + 'qaqa'))
+})
+
 app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))

@@ -1,45 +1,59 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+const sha256 = require('js-sha256')
 
 var userSchema = new Schema({
   username: { type: String, required: true },
-  password: { type: String, required: true }
+  email: { type: String, required: true },
+  salt: { type: String, required: true },
+  passwordEncrypt: { type: String, required: true },
+  dateCreate: { type: Date, default: Date.now }
 })
 
 const User = mongoose.model('User', userSchema)
 
-module.exports.find = async function () {
+module.exports.findOne = async function (email, password) {
   try {
-    const username = 'qq'
-    const password = '123'
-    const user = await User.find({ username: username, password: password })
-    return { user: user, error: '' }
+    // get salt
+    const userSalt = await User.findOne({ email: email })
+    const salt = userSalt.salt
+    try {
+      const user = await User.findOne({ email: email, passwordEncrypt: sha256(salt + password) })
+      return user
+    } catch (err) {
+      return null
+    }
   } catch (err) {
-    console.log('console.log can not find the user')
-    return { user: null, error: 'can not find the user' }
+    // console.log('can not find the user')
+    return null
   }
 }
 
-module.exports.findOne = async function (username) {
+/* module.exports.findOne = async function (username) {
   try {
     const user = await User.findOne({ username: username })
     return user
   } catch (err) {
     console.log('can not find the user')
   }
-}
+} */
 
-module.exports.insert = async function (username, password) {
+module.exports.insert = async function (username, email, password) {
+  const time = Date.now()
+  const salt = sha256(time.toString() + 'qaqa')
+
   try {
     const user = new User({
       username: username,
-      password: password
+      email: email,
+      salt: salt,
+      passwordEncrypt: sha256(salt + password)
     })
     await user.save()
-    return { user: user, error: '' }
+    return { user: user, error: '', status: true }
   } catch (err) {
     console.log(err)
-    return { user: null, error: 'can not create the user, error: ' + err }
+    return { user: null, error: 'can not create the user, error: ' + err, status: false }
     // gérez les erreurs ici
   }
 }

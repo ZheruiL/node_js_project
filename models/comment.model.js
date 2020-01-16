@@ -11,12 +11,13 @@ var commentSchema = new Schema({
 
 const Comment = mongoose.model('Comment', commentSchema)
 
-module.exports.create = async function (_topic, content, _parent = null) {
-  const user = { _id: null }
+module.exports.create = async function (_topic, content, _parent = null, _id = null) {
+  // const user = { _id: null }
   try {
     const comment = new Comment({
       _topic: _topic,
-      _creator: user._id, // la référence se fait par l'id
+      // _creator: user._id, // la référence se fait par l'id
+      _creator: _id,
       content: content,
       _parent: _parent // 父类评论的id
     })

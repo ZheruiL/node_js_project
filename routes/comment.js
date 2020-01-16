@@ -18,7 +18,7 @@ router.post('/', async (req, res) => {
     res.status(400).send('content is required')
     return // 需要return停止
   }
-  const result = await Comment.create(req.body._topic, req.body.content, req.body.parentId)
+  const result = await Comment.create(req.body._topic, req.body.content, req.body.parentId, req.session.userId)
   if (result.status === false) {
     res.status(400).send(result)
   } else {
@@ -30,27 +30,6 @@ router.post('/', async (req, res) => {
 router.get('/:topicId', async (req, res) => {
   const comments = await Comment.find(req.params.topicId)
   res.json(comments)
-})
-
-// 获得单个话题
-router.get('/:topicId', async (req, res) => {
-  const result = await Topic.findOne(req.params.topicId)
-  if (result.status === true) {
-    res.json(result)
-  } else {
-    res.status(400).send(result)
-  }
-})
-
-// 删除
-router.delete('/:topicId', async (req, res) => {
-  // res.json({ status: 'caonimaa' })
-  const result = await Topic.delete(req.params.topicId)
-  if (result.status === true) {
-    res.json({ status: 'ok' })
-  } else {
-    res.status(400).send(result)
-  }
 })
 
 // test find article
