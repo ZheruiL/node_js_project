@@ -1,11 +1,12 @@
-var express = require('express')
-var session = require('express-session')
+const express = require('express')
+const session = require('express-session')
 
-var path = require('path')
-var cookieParser = require('cookie-parser')
-var logger = require('morgan')
+const path = require('path')
+const cookieParser = require('cookie-parser')
+const logger = require('morgan')
 
-var indexRouter = require('./routes/index')
+// var indexRouter = require('./routes/index')
+const cors = require('cors')
 const users = require('./routes/users.js')
 const article = require('./routes/article')
 const topic = require('./routes/topic')
@@ -18,16 +19,21 @@ mongoose.connect('mongodb://localhost/tp4')
 var app = express()
 
 // 允许跨域
-app.all('*', function (req, res, next) {
+/* app.all('*', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Allow-Headers',
     'Content-Type,Content-Length, Authorization, Accept,X-Requested-With')
   res.header('Access-Control-Allow-Methods',
     'PUT,POST,GET,DELETE,OPTIONS')
   res.header('X-Powered-By', ' 3.2.1')
-  if (req.method == 'OPTIONS') res.send(200)/* 让options请求快速返回 */
+  if (req.method == 'OPTIONS') res.send(200)
   else next()
-})
+}) */
+// sessions dans la version de développement
+app.use(cors({
+  credentials: true,
+  origin: 'http://localhost:3000' // si votre port est différent, changez cette valeur !
+}))
 
 app.use(bodyParser.urlencoded({ extended: false })) // for simple form posts
 app.use(bodyParser.json()) // for API requests

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+const User = require('../models/user.model.js')
 
 var commentSchema = new Schema({
   _topic: { type: Schema.Types.ObjectId, ref: 'Topic' },
@@ -31,10 +32,15 @@ module.exports.create = async function (_topic, content, _parent = null, _id = n
 module.exports.find = async function (_topicId) {
   try {
     const comments = await Comment.find({ _topic: _topicId }).sort({ dateCreate: 'desc' }).exec()
+    for (let i = 0; i < comments.length; i++) {
+      comments[i].creator = await User.getInfo(comments[i]._creator)
+      console.log(comments[i].creator)
+    }
+    // console.log(comments)
     return { comments: comments, error: '' }
   } catch (err) {
     console.log('can not find any comment')
-    return { topics: [], error: 'can not find any comment' }
+    return { comments: [], error: 'can not find any comment' }
   }
 }
 

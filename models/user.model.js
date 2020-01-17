@@ -12,6 +12,15 @@ var userSchema = new Schema({
 
 const User = mongoose.model('User', userSchema)
 
+module.exports.getInfo = async function (_id) {
+  try {
+    const user = await User.findOne({ _id: _id })
+    return user
+  } catch (err) {
+    return null
+  }
+}
+
 module.exports.findOne = async function (email, password) {
   try {
     // get salt
