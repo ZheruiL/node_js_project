@@ -43,7 +43,7 @@ app.use(session({
   name: 'sessId'
 }))
 
-app.use('/user', users) // 使用这个路由给user
+app.use('/user', users)
 app.use('/article', article)
 app.use('/topics', topic)
 app.use('/comments', comment)
